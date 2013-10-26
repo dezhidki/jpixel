@@ -40,7 +40,8 @@ public class Keyboard {
 		 * Sets the next state for the key, which will be applied the next time
 		 * update() runs.
 		 * 
-		 * @param state The new state of the key.
+		 * @param state
+		 *            The new state of the key.
 		 */
 		public void setNextState(boolean state) {
 			nextState = state;
@@ -71,8 +72,9 @@ public class Keyboard {
 	/**
 	 * Initializes the keyboard and add it to the current Component.
 	 * 
-	 * @param component Java's AWT Component (can be Swing component too) to
-	 *        which the keyboard will be assigned.
+	 * @param component
+	 *            Java's AWT Component (can be Swing component too) to which the
+	 *            keyboard will be assigned.
 	 */
 	public Keyboard(Component component) {
 		keyboardHandler = new InputHandler.KeyHandler();
@@ -92,7 +94,8 @@ public class Keyboard {
 	 * Checks if the key has been pressed (current state differs from the old
 	 * one).
 	 * 
-	 * @param key Key to check. See {@link KeyEvent}.
+	 * @param key
+	 *            Key to check. See {@link KeyEvent}.
 	 * @return True, if the key has been pressed.
 	 */
 	public final static boolean isKeyPressed(int key) {
@@ -105,7 +108,8 @@ public class Keyboard {
 	/**
 	 * Checks if the key is currently down.
 	 * 
-	 * @param key Key to check. See {@link KeyEvent}.
+	 * @param key
+	 *            Key to check. See {@link KeyEvent}.
 	 * @return True, if the key is currently down.
 	 */
 	public final static boolean isKeyDown(int key) {
@@ -118,7 +122,8 @@ public class Keyboard {
 	/**
 	 * Registers the key, so it can be checked.
 	 * 
-	 * @param key A {@link KeyEvent} key to register
+	 * @param key
+	 *            A {@link KeyEvent} key to register
 	 */
 	public final void registerKey(int key) {
 		keyboardHandler.registeredKeys.put(key, new Key());

@@ -22,8 +22,10 @@ public class Vec2DPolar {
 	/**
 	 * Initializes the vector.
 	 * 
-	 * @param length Vector's length (<i>r</i>).
-	 * @param angle Vector's angle (<i>theta</i>).
+	 * @param length
+	 *            Vector's length (<i>r</i>).
+	 * @param angle
+	 *            Vector's angle (<i>theta</i>).
 	 */
 	public Vec2DPolar(double length, double angle) {
 		this.length = length;
@@ -33,7 +35,8 @@ public class Vec2DPolar {
 	/**
 	 * Convert point vector to polar vector.
 	 * 
-	 * @param vec Point vector.
+	 * @param vec
+	 *            Point vector.
 	 */
 	public Vec2DPolar(Vec2Di vec) {
 		this.length = vec.length();
@@ -43,7 +46,8 @@ public class Vec2DPolar {
 	/**
 	 * Convert point vector to polar vector.
 	 * 
-	 * @param vec Point vector.
+	 * @param vec
+	 *            Point vector.
 	 */
 	public Vec2DPolar(Vec2Dd vec) {
 		this.length = vec.length();
@@ -53,7 +57,8 @@ public class Vec2DPolar {
 	/**
 	 * Convert point vector to polar vector.
 	 * 
-	 * @param vec Point vector.
+	 * @param vec
+	 *            Point vector.
 	 */
 	public Vec2DPolar(Vec2Df vec) {
 		this.length = vec.length();

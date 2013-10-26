@@ -33,7 +33,8 @@ public class Mouse {
 		 * Sets the next state for the mouse button, which will be applied the
 		 * next time update() runs.
 		 * 
-		 * @param state The new state of the mouse button.
+		 * @param state
+		 *            The new state of the mouse button.
 		 */
 		public void setNextState(boolean state) {
 			nextState = state;
@@ -71,8 +72,9 @@ public class Mouse {
 	/**
 	 * Initializes the mouse.
 	 * 
-	 * @param component Java's AWT Component (can be Swing component too) to
-	 *        which the mouse will be assigned.
+	 * @param component
+	 *            Java's AWT Component (can be Swing component too) to which the
+	 *            mouse will be assigned.
 	 */
 	public Mouse(Component component) {
 		mouseHandler = new InputHandler.MouseHandler();
@@ -102,7 +104,8 @@ public class Mouse {
 	 * Checks if the mouse button has been pressed (current state differs from
 	 * the older).
 	 * 
-	 * @param button Mouse button to check. See {@link MouseEvent}.
+	 * @param button
+	 *            Mouse button to check. See {@link MouseEvent}.
 	 * @return True, if mouse button has been pressed.
 	 */
 	public final static boolean isButtonPressed(int button) {
@@ -115,7 +118,8 @@ public class Mouse {
 	/**
 	 * Checks if the mouse button is currently held down.
 	 * 
-	 * @param button Mouse button to check. See {@link MouseEvent}.
+	 * @param button
+	 *            Mouse button to check. See {@link MouseEvent}.
 	 * @return True, if mouse is currently held down.
 	 */
 	public final static boolean isButtonDown(int button) {
@@ -146,7 +150,8 @@ public class Mouse {
 	/**
 	 * Registers a mouse button for checking.
 	 * 
-	 * @param button A {@link MouseEvent} button to register.
+	 * @param button
+	 *            A {@link MouseEvent} button to register.
 	 */
 	public final void registerMouseButton(int button) {
 		mouseHandler.registeredButtons.put(button, new MouseButton());

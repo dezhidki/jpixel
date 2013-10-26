@@ -46,8 +46,10 @@ public final class InputHandler {
 		/**
 		 * Toggles the key's state.
 		 * 
-		 * @param ke {@link KeyEvent} that contains the key.
-		 * @param state Key's new state.
+		 * @param ke
+		 *            {@link KeyEvent} that contains the key.
+		 * @param state
+		 *            Key's new state.
 		 */
 		private void toggleKey(KeyEvent ke, boolean state) {
 			Key key = registeredKeys.get(ke.getKeyCode());
@@ -108,8 +110,10 @@ public final class InputHandler {
 		/**
 		 * Toggles the mouse button's state.
 		 * 
-		 * @param me {@link MouseEvent} that contains the mouse button.
-		 * @param state Mouse button's new state.
+		 * @param me
+		 *            {@link MouseEvent} that contains the mouse button.
+		 * @param state
+		 *            Mouse button's new state.
 		 */
 		private void toggleButton(MouseEvent me, boolean state) {
 			MouseButton mb = registeredButtons.get(me.getButton());

@@ -21,8 +21,10 @@ public class Vec2Di {
 	/**
 	 * Initialize vector.
 	 * 
-	 * @param x Coordinate in X -axis.
-	 * @param y Coordinate in Y -axis.
+	 * @param x
+	 *            Coordinate in X -axis.
+	 * @param y
+	 *            Coordinate in Y -axis.
 	 */
 	public Vec2Di(int x, int y) {
 		this.x = x;
@@ -32,7 +34,8 @@ public class Vec2Di {
 	/**
 	 * Create copy of the vector.
 	 * 
-	 * @param vec Vector to copy.
+	 * @param vec
+	 *            Vector to copy.
 	 */
 	public Vec2Di(Vec2Di vec) {
 		this.x = vec.x;
@@ -45,7 +48,8 @@ public class Vec2Di {
 	 * <b>Note:</b> The values will be converted from a floating-point number
 	 * which is more precise than integer value.
 	 * 
-	 * @param vec Vector to copy.
+	 * @param vec
+	 *            Vector to copy.
 	 */
 	public Vec2Di(Vec2Df vec) {
 		this.x = (int) vec.x;
@@ -58,7 +62,8 @@ public class Vec2Di {
 	 * <b>Note:</b> The values will be converted from a floating-point number
 	 * which is more precise than integer value.
 	 * 
-	 * @param vec Vector to copy.
+	 * @param vec
+	 *            Vector to copy.
 	 */
 	public Vec2Di(Vec2Dd vec) {
 		this.x = (int) vec.x;
@@ -72,7 +77,8 @@ public class Vec2Di {
 	 * <b>Note:</b> This will create a copy of the vector, but only in converted
 	 * form.
 	 * 
-	 * @param vec Vector to convert.
+	 * @param vec
+	 *            Vector to convert.
 	 */
 	public Vec2Di(Vec2DPolar vec) {
 		this.x = (int) (vec.length * Math.sin(vec.angle));
@@ -82,17 +88,19 @@ public class Vec2Di {
 	/**
 	 * Compute the dot product of the vectors.
 	 * 
-	 * @param vec Second vector.
+	 * @param vec
+	 *            Second vector.
 	 * @return The dot product of this and second vector.
 	 */
 	public final int dot(Vec2Di vec) {
 		return this.x * vec.x + this.y * vec.y;
 	}
-	
+
 	/**
 	 * Compute the dot product of the vectors.
 	 * 
-	 * @param vec Second vector.
+	 * @param vec
+	 *            Second vector.
 	 * @return The dot product of this and second vector.
 	 */
 	public final double dot(Vec2Dd vec) {
@@ -102,7 +110,8 @@ public class Vec2Di {
 	/**
 	 * Compute the dot product of the vectors.
 	 * 
-	 * @param vec Second vector.
+	 * @param vec
+	 *            Second vector.
 	 * @return The dot product of this and second vector.
 	 */
 	public final double dot(Vec2Df vec) {
@@ -112,7 +121,8 @@ public class Vec2Di {
 	/**
 	 * Compute the cross product of the vectors.
 	 * 
-	 * @param vec Second vector.
+	 * @param vec
+	 *            Second vector.
 	 * @return The cross product of this and second vector.
 	 */
 	public final int cross(Vec2Di vec) {
@@ -122,7 +132,8 @@ public class Vec2Di {
 	/**
 	 * Compute the cross product of the vectors.
 	 * 
-	 * @param vec Second vector.
+	 * @param vec
+	 *            Second vector.
 	 * @return The cross product of this and second vector.
 	 */
 	public final double cross(Vec2Dd vec) {
@@ -132,7 +143,8 @@ public class Vec2Di {
 	/**
 	 * Compute the cross product of the vectors.
 	 * 
-	 * @param vec Second vector.
+	 * @param vec
+	 *            Second vector.
 	 * @return The cross product of this and second vector.
 	 */
 	public final double cross(Vec2Df vec) {
@@ -151,8 +163,10 @@ public class Vec2Di {
 	/**
 	 * Gets the distance from the point.
 	 * 
-	 * @param x Point's X coordinate.
-	 * @param y Point's Y coordinate.
+	 * @param x
+	 *            Point's X coordinate.
+	 * @param y
+	 *            Point's Y coordinate.
 	 * @return Distance between the vector and the point.
 	 */
 	public final double distance(int x, int y) {
@@ -164,7 +178,8 @@ public class Vec2Di {
 	/**
 	 * Gets the distance between this vector and another.
 	 * 
-	 * @param vec Vector.
+	 * @param vec
+	 *            Vector.
 	 * @return Distance between this and given vector.
 	 */
 	public final double distance(Vec2Di vec) {
@@ -176,7 +191,8 @@ public class Vec2Di {
 	/**
 	 * Gets the distance between this vector and another.
 	 * 
-	 * @param vec Vector.
+	 * @param vec
+	 *            Vector.
 	 * @return Distance between this and given vector.
 	 */
 	public final double distance(Vec2Dd vec) {
@@ -188,7 +204,8 @@ public class Vec2Di {
 	/**
 	 * Gets the distance between this vector and another.
 	 * 
-	 * @param vec Vector.
+	 * @param vec
+	 *            Vector.
 	 * @return Distance between this and given vector.
 	 */
 	public final double distance(Vec2Df vec) {
@@ -213,7 +230,8 @@ public class Vec2Di {
 	/**
 	 * Scales the vector's length (while keeping the direction).
 	 * 
-	 * @param scale Scale amount.
+	 * @param scale
+	 *            Scale amount.
 	 * @return This vector. Used to perform multiple actions.
 	 */
 	public final Vec2Di scale(double scale) {
