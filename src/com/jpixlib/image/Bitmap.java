@@ -85,9 +85,9 @@ public class Bitmap {
 	 */
 	public void blit(Bitmap b, int x, int y) {
 		int x0 = x < 0 ? 0 : x;
-		int x1 = x0 + b.width;
+		int x1 = x + b.width;
 		int y0 = y < 0 ? 0 : y;
-		int y1 = y0 + b.height;
+		int y1 = y + b.height;
 
 		if (y1 > height)
 			y1 = height;
@@ -101,11 +101,11 @@ public class Bitmap {
 			return;
 
 		for (int yp = y0; yp < y1; yp++) {
-			int tp = yp * width;
+			int tp = x0 + yp * width;
 			int bp = (x0 - x) + (yp - y) * b.width;
-
-			for (int xp = x0; xp < x1; xp++) {
-				pixels[xp + tp] = pixels[xp + bp];
+			tp -= bp;
+			for (int xp = bp; xp < bp + w; xp++) {
+				pixels[tp + xp] = b.pixels[xp];
 			}
 		}
 	}
@@ -130,9 +130,9 @@ public class Bitmap {
 	 */
 	public void blit(Bitmap b, int x, int y, int xb, int yb, int w, int h) {
 		int x0 = x < 0 ? 0 : x;
-		int x1 = x0 + w;
+		int x1 = x + w;
 		int y0 = y < 0 ? 0 : y;
-		int y1 = y0 + h;
+		int y1 = y + h;
 
 		if (y1 > height)
 			y1 = height;
@@ -146,11 +146,11 @@ public class Bitmap {
 			return;
 
 		for (int yp = y0; yp < y1; yp++) {
-			int tp = yp * width;
+			int tp = x0 + yp * width;
 			int sp = (x0 - x + xb) + (yp - y + yb) * b.width;
-
-			for (int xp = x0; xp < x1; xp++) {
-				pixels[xp + tp] = b.pixels[xp + sp];
+			tp -= sp;
+			for (int xp = sp; xp < sp + ww; xp++) {
+				pixels[tp + xp] = b.pixels[xp];
 			}
 		}
 	}
