@@ -9,9 +9,33 @@ package com.jpixlib.color;
  */
 public final class ColorMath {
 	public static enum EColorComponent {
-		ALPHA, RED, GREEN, BLUE
+		ALPHA(24, 0xFF000000),
+		RED(16, 0xFF0000),
+		GREEN(8, 0xFF00),
+		BLUE(0, 0xFF);
+		
+		public final int shift, mask;
+		
+		private EColorComponent(int shift, int mask){
+			this.shift = shift;
+			this.mask = mask;
+		}
 	}
 
+	/**
+	 * Multiplies given RGB color by the multiplier.
+	 * 
+	 * @param color RGB color.
+	 * @param multiplier A integer in range [0, 255]
+	 * @return A color, that has been multiplied by the given number.
+	 */
+	public static int multiplyRGB(int color, int multiplier){
+		int rb = (((color & 0xFF00FF) * multiplier) >> 8) & 0xFF00FF; 
+		int g = (((color & 0xFF00) * multiplier) >> 8) & 0xFF00;
+		
+		return rb | g;
+	}
+	
 	/**
 	 * Blends two colors together.
 	 * 
@@ -24,7 +48,7 @@ public final class ColorMath {
 	 *            color1, 256 will return only color2.
 	 * @return Blended color.
 	 */
-	public int blend(int color1, int color2, int factor) {
+	public static int blend(int color1, int color2, int factor) {
 		int f1 = 256 - factor;
 		return ((((color1 & 0xFF00FF) * f1 + (color2 & 0xFF00FF) * factor) & 0xFF00FF00) | (((color1 & 0x00FF00) * f1 + (color2 & 0x00FF00) * factor) & 0x00FF0000)) >>> 8;
 	}
@@ -42,7 +66,7 @@ public final class ColorMath {
 	 *            Blue.
 	 * @return All color channels combined into single integer.
 	 */
-	public int toARGB(int a, int r, int g, int b) {
+	public static int toARGB(int a, int r, int g, int b) {
 		return a << 24 | r << 16 | g << 8 | b;
 	}
 
@@ -55,18 +79,11 @@ public final class ColorMath {
 	 *            Color channel to get.
 	 * @return Color channel.
 	 */
-	public int getColor(int colARGB, EColorComponent colorComponent) {
-		switch (colorComponent) {
-		case ALPHA:
-			return (colARGB & 0xFF000000) >>> 24;
-		case RED:
-			return (colARGB & 0x00FF0000) >> 16;
-		case GREEN:
-			return (colARGB & 0x0000FF00) >> 8;
-		case BLUE:
-			return colARGB & 0x000000FF;
-		}
-		return 0;
+	public static int getColor(int colARGB, EColorComponent colorComponent) {
+		if(colorComponent == EColorComponent.ALPHA)
+			return (colARGB & colorComponent.mask) >>> colorComponent.shift;
+		
+		return (colARGB & colorComponent.mask) >> colorComponent.shift;
 	}
 
 }

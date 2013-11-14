@@ -34,7 +34,7 @@ public class ImageLoader {
 
 		return result;
 	}
-
+	
 	/**
 	 * Loads an image as a {@link SpriteSheet} from the resource folder.
 	 * 

@@ -61,10 +61,8 @@ public class Bitmap {
 		int x1 = x0 + w;
 		int y0 = y < 0 ? 0 : y;
 		int y1 = y0 + h;
-		if (y1 >= height)
-			y1 = height - 1;
-		if (x1 >= width)
-			x1 = width - 1;
+		if (y1 >= height) y1 = height - 1;
+		if (x1 >= width) x1 = width - 1;
 
 		for (int yp = y0; yp <= y1; yp++)
 			for (int xp = x0; xp <= x1; xp++)
@@ -89,23 +87,15 @@ public class Bitmap {
 		int y0 = y < 0 ? 0 : y;
 		int y1 = y + b.height;
 
-		if (y1 > height)
-			y1 = height;
-		if (x1 > width)
-			x1 = width;
-
-		int w = x1 - x0;
-		int h = y1 - y0;
-
-		if (w <= 0 || h <= 0)
-			return;
+		if (y1 > height) y1 = height;
+		if (x1 > width) x1 = width;
 
 		for (int yp = y0; yp < y1; yp++) {
-			int tp = x0 + yp * width;
-			int bp = (x0 - x) + (yp - y) * b.width;
-			tp -= bp;
-			for (int xp = bp; xp < bp + w; xp++) {
-				pixels[tp + xp] = b.pixels[xp];
+			int tp = yp * width;
+			int bp = (yp - y) * b.width - x;
+
+			for (int xp = x0; xp < x1; xp++) {
+				pixels[xp + tp] = b.pixels[xp + bp];
 			}
 		}
 	}
@@ -129,28 +119,25 @@ public class Bitmap {
 	 *            Height of the area to blit.
 	 */
 	public void blit(Bitmap b, int x, int y, int xb, int yb, int w, int h) {
+		if (w < 0 || h < 0) return;
+		if (w > b.width - xb) w = b.width - xb;
+		if (h > b.height - yb) h = b.height - yb;
+		if (!(xb >= 0 && yb >= 0 && xb <= w && yb <= h)) return;
+
 		int x0 = x < 0 ? 0 : x;
 		int x1 = x + w;
 		int y0 = y < 0 ? 0 : y;
 		int y1 = y + h;
 
-		if (y1 > height)
-			y1 = height;
-		if (x1 > width)
-			x1 = width;
-
-		int ww = x1 - x0;
-		int hh = y1 - y0;
-
-		if (ww <= 0 || hh <= 0)
-			return;
+		if (y1 > height) y1 = height;
+		if (x1 > width) x1 = width;
 
 		for (int yp = y0; yp < y1; yp++) {
-			int tp = x0 + yp * width;
-			int sp = (x0 - x + xb) + (yp - y + yb) * b.width;
-			tp -= sp;
-			for (int xp = sp; xp < sp + ww; xp++) {
-				pixels[tp + xp] = b.pixels[xp];
+			int tp = yp * width;
+			int sp = (yp - y + yb) * b.width - (x - xb);
+
+			for (int xp = x0; xp < x1; xp++) {
+				pixels[tp + xp] = b.pixels[xp + sp];
 			}
 		}
 	}
