@@ -1,4 +1,4 @@
-package com.jpixlib.vecmth;
+package com.jpixel.vecmth;
 
 /**
  * Point vector (Integer).

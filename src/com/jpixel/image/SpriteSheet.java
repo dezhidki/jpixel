@@ -1,4 +1,4 @@
-package com.jpixlib.image;
+package com.jpixel.image;
 
 /**
  * A sprite sheet; a bitmap that contains smaller bitmaps (sprites) of the same

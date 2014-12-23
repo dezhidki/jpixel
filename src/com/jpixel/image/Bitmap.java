@@ -1,4 +1,4 @@
-package com.jpixlib.image;
+package com.jpixel.image;
 
 /**
  * A container for 2D pixel data. The class includes some useful functions to

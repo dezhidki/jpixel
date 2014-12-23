@@ -1,4 +1,4 @@
-package com.jpixlib.color;
+package com.jpixel.color;
 
 /**
  * Basic color math.

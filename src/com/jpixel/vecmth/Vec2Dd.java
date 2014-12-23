@@ -1,4 +1,4 @@
-package com.jpixlib.vecmth;
+package com.jpixel.vecmth;
 
 /**
  * Point vector (Double).
@@ -7,21 +7,16 @@ package com.jpixlib.vecmth;
  * @version 1.0
  * @since 18.5.2013
  */
-public class Vec2Df {
+public class Vec2Dd {
 	/**
 	 * Zero vector.
 	 */
-	public static final Vec2Df Zero = new Vec2Df(0.0F, 0.0F);
+	public static final Vec2Dd Zero = new Vec2Dd(0, 0);
 
 	/**
 	 * Vector coordinates.
 	 */
-	public float x, y;
-
-	public Vec2Df(float x, float y) {
-		this.x = x;
-		this.y = y;
-	}
+	public double x, y;
 
 	/**
 	 * Initialize vector.
@@ -31,7 +26,18 @@ public class Vec2Df {
 	 * @param y
 	 *            Coordinate in Y -axis.
 	 */
-	public Vec2Df(Vec2Df vec) {
+	public Vec2Dd(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	/**
+	 * Create copy of the vector.
+	 * 
+	 * @param vec
+	 *            Vector to copy.
+	 */
+	public Vec2Dd(Vec2Di vec) {
 		this.x = vec.x;
 		this.y = vec.y;
 	}
@@ -42,7 +48,7 @@ public class Vec2Df {
 	 * @param vec
 	 *            Vector to copy.
 	 */
-	public Vec2Df(Vec2Di vec) {
+	public Vec2Dd(Vec2Dd vec) {
 		this.x = vec.x;
 		this.y = vec.y;
 	}
@@ -53,9 +59,9 @@ public class Vec2Df {
 	 * @param vec
 	 *            Vector to copy.
 	 */
-	public Vec2Df(Vec2Dd vec) {
-		this.x = (float) vec.x;
-		this.y = (float) vec.y;
+	public Vec2Dd(Vec2Df vec) {
+		this.x = vec.x;
+		this.y = vec.y;
 	}
 
 	/**
@@ -65,9 +71,9 @@ public class Vec2Df {
 	 * @param vec
 	 *            Vector to convert.
 	 */
-	public Vec2Df(Vec2DPolar vec) {
-		this.x = (float) (vec.length * Math.sin(vec.angle));
-		this.y = (float) (vec.length * Math.cos(vec.angle));
+	public Vec2Dd(Vec2DPolar vec) {
+		this.x = vec.length * Math.sin(vec.angle);
+		this.y = vec.length * Math.cos(vec.angle);
 	}
 
 	/**
@@ -154,22 +160,9 @@ public class Vec2Df {
 	 *            Point's Y coordinate.
 	 * @return Distance between the vector and the point.
 	 */
-	public final double distance(float x, float y) {
-		float dx = (this.x - x);
-		float dy = (this.y - y);
-		return Math.sqrt(dx * dx + dy * dy);
-	}
-
-	/**
-	 * Gets the distance between this vector and another.
-	 * 
-	 * @param vec
-	 *            Vector.
-	 * @return Distance between this and given vector.
-	 */
-	public final double distance(Vec2Df vec) {
-		float dx = (this.x - vec.x);
-		float dy = (this.y - vec.y);
+	public final double distance(double x, double y) {
+		double dx = (this.x - x);
+		double dy = (this.y - y);
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 
@@ -193,9 +186,22 @@ public class Vec2Df {
 	 *            Vector.
 	 * @return Distance between this and given vector.
 	 */
+	public final double distance(Vec2Df vec) {
+		double dx = (this.x - vec.x);
+		double dy = (this.y - vec.y);
+		return Math.sqrt(dx * dx + dy * dy);
+	}
+
+	/**
+	 * Gets the distance between this vector and another.
+	 * 
+	 * @param vec
+	 *            Vector.
+	 * @return Distance between this and given vector.
+	 */
 	public final double distance(Vec2Di vec) {
-		float dx = (this.x - vec.x);
-		float dy = (this.y - vec.y);
+		double dx = (this.x - vec.x);
+		double dy = (this.y - vec.y);
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 
@@ -205,7 +211,7 @@ public class Vec2Df {
 	 * 
 	 * @return This vector. Used to perform multiple actions.
 	 */
-	public final Vec2Df normalize() {
+	public final Vec2Dd normalize() {
 		double factor = 1.0 / length();
 		x *= factor;
 		y *= factor;
@@ -219,7 +225,7 @@ public class Vec2Df {
 	 *            Scale amount.
 	 * @return This vector. Used to perform multiple actions.
 	 */
-	public final Vec2Df scale(double scale) {
+	public final Vec2Dd scale(double scale) {
 		double factor = scale / length();
 		x *= factor;
 		y *= factor;
@@ -252,7 +258,6 @@ public class Vec2Df {
 
 	@Override
 	public String toString() {
-		return String.format("Vec2D<Float>: [%1$.5d, %2&.5d] : %3$", x, y, hashCode());
+		return String.format("Vec2D<Double>: [%1$.5d, %2&.5d] : %3$", x, y, hashCode());
 	}
-
 }

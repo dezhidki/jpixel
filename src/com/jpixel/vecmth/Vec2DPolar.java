@@ -1,4 +1,4 @@
-package com.jpixlib.vecmth;
+package com.jpixel.vecmth;
 
 /**
  * Polar vector (length and angle).

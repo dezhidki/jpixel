@@ -1,4 +1,4 @@
-package com.jpixlib.input;
+package com.jpixel.input;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;

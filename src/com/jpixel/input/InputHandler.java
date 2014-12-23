@@ -1,4 +1,4 @@
-package com.jpixlib.input;
+package com.jpixel.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,8 +7,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 
-import com.jpixlib.input.Keyboard.Key;
-import com.jpixlib.input.Mouse.MouseButton;
+import com.jpixel.input.Keyboard.Key;
+import com.jpixel.input.Mouse.MouseButton;
 
 /**
  * A class for processing input.
