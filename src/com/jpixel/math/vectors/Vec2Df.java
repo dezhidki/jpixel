@@ -1,4 +1,4 @@
-package com.jpixel.vecmth;
+package com.jpixel.math.vectors;
 
 /**
  * Point vector (Double).
@@ -24,12 +24,10 @@ public class Vec2Df {
 	}
 
 	/**
-	 * Initialize vector.
+	 * Copy other vector's coordinates.
 	 * 
-	 * @param x
-	 *            Coordinate in X -axis.
-	 * @param y
-	 *            Coordinate in Y -axis.
+	 * @param vec
+	 *            Vector to copy from.
 	 */
 	public Vec2Df(Vec2Df vec) {
 		this.x = vec.x;

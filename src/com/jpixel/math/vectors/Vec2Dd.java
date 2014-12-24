@@ -1,22 +1,22 @@
-package com.jpixel.vecmth;
+package com.jpixel.math.vectors;
 
 /**
- * Point vector (Integer).
+ * Point vector (Double).
  * 
  * @author Denis Zhidkikh
  * @version 1.0
  * @since 18.5.2013
  */
-public class Vec2Di {
+public class Vec2Dd {
 	/**
 	 * Zero vector.
 	 */
-	public static final Vec2Di Zero = new Vec2Di(0, 0);
+	public static final Vec2Dd Zero = new Vec2Dd(0, 0);
 
 	/**
 	 * Vector coordinates.
 	 */
-	public int x, y;
+	public double x, y;
 
 	/**
 	 * Initialize vector.
@@ -26,7 +26,7 @@ public class Vec2Di {
 	 * @param y
 	 *            Coordinate in Y -axis.
 	 */
-	public Vec2Di(int x, int y) {
+	public Vec2Dd(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -37,52 +37,43 @@ public class Vec2Di {
 	 * @param vec
 	 *            Vector to copy.
 	 */
-	public Vec2Di(Vec2Di vec) {
+	public Vec2Dd(Vec2Di vec) {
 		this.x = vec.x;
 		this.y = vec.y;
 	}
 
 	/**
-	 * Create copy of the vector.<br>
-	 * 
-	 * <b>Note:</b> The values will be converted from a floating-point number
-	 * which is more precise than integer value.
+	 * Create copy of the vector.
 	 * 
 	 * @param vec
 	 *            Vector to copy.
 	 */
-	public Vec2Di(Vec2Df vec) {
-		this.x = (int) vec.x;
-		this.y = (int) vec.y;
+	public Vec2Dd(Vec2Dd vec) {
+		this.x = vec.x;
+		this.y = vec.y;
 	}
 
 	/**
-	 * Create copy of the vector.<br>
-	 * 
-	 * <b>Note:</b> The values will be converted from a floating-point number
-	 * which is more precise than integer value.
+	 * Create copy of the vector.
 	 * 
 	 * @param vec
 	 *            Vector to copy.
 	 */
-	public Vec2Di(Vec2Dd vec) {
-		this.x = (int) vec.x;
-		this.y = (int) vec.y;
+	public Vec2Dd(Vec2Df vec) {
+		this.x = vec.x;
+		this.y = vec.y;
 	}
 
 	/**
 	 * Convert polar coordinate vector (magnitude and direction) to point vector
-	 * (x and y).<br>
-	 * 
-	 * <b>Note:</b> This will create a copy of the vector, but only in converted
-	 * form.
+	 * (x and y).
 	 * 
 	 * @param vec
 	 *            Vector to convert.
 	 */
-	public Vec2Di(Vec2DPolar vec) {
-		this.x = (int) (vec.length * Math.sin(vec.angle));
-		this.y = (int) (vec.length * Math.cos(vec.angle));
+	public Vec2Dd(Vec2DPolar vec) {
+		this.x = vec.length * Math.sin(vec.angle);
+		this.y = vec.length * Math.cos(vec.angle);
 	}
 
 	/**
@@ -92,7 +83,7 @@ public class Vec2Di {
 	 *            Second vector.
 	 * @return The dot product of this and second vector.
 	 */
-	public final int dot(Vec2Di vec) {
+	public final double dot(Vec2Di vec) {
 		return this.x * vec.x + this.y * vec.y;
 	}
 
@@ -125,7 +116,7 @@ public class Vec2Di {
 	 *            Second vector.
 	 * @return The cross product of this and second vector.
 	 */
-	public final int cross(Vec2Di vec) {
+	public final double cross(Vec2Di vec) {
 		return vec.x * this.y - vec.y * this.x;
 	}
 
@@ -169,22 +160,9 @@ public class Vec2Di {
 	 *            Point's Y coordinate.
 	 * @return Distance between the vector and the point.
 	 */
-	public final double distance(int x, int y) {
-		int dx = (this.x - x);
-		int dy = (this.y - y);
-		return Math.sqrt(dx * dx + dy * dy);
-	}
-
-	/**
-	 * Gets the distance between this vector and another.
-	 * 
-	 * @param vec
-	 *            Vector.
-	 * @return Distance between this and given vector.
-	 */
-	public final double distance(Vec2Di vec) {
-		int dx = (this.x - vec.x);
-		int dy = (this.y - vec.y);
+	public final double distance(double x, double y) {
+		double dx = (this.x - x);
+		double dy = (this.y - y);
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 
@@ -215,12 +193,25 @@ public class Vec2Di {
 	}
 
 	/**
+	 * Gets the distance between this vector and another.
+	 * 
+	 * @param vec
+	 *            Vector.
+	 * @return Distance between this and given vector.
+	 */
+	public final double distance(Vec2Di vec) {
+		double dx = (this.x - vec.x);
+		double dy = (this.y - vec.y);
+		return Math.sqrt(dx * dx + dy * dy);
+	}
+
+	/**
 	 * Normalizes the vector (setting vector's length to 1.0 while keeping the
 	 * direction).
 	 * 
 	 * @return This vector. Used to perform multiple actions.
 	 */
-	public final Vec2Di normalize() {
+	public final Vec2Dd normalize() {
 		double factor = 1.0 / length();
 		x *= factor;
 		y *= factor;
@@ -234,7 +225,7 @@ public class Vec2Di {
 	 *            Scale amount.
 	 * @return This vector. Used to perform multiple actions.
 	 */
-	public final Vec2Di scale(double scale) {
+	public final Vec2Dd scale(double scale) {
 		double factor = scale / length();
 		x *= factor;
 		y *= factor;
@@ -262,13 +253,11 @@ public class Vec2Di {
 	 * @return Angle of the vector.
 	 */
 	public final double getDirectionAngle() {
-		double a = Math.atan2(y, x);
-		return a < 0.0F ? a + Math.PI * 2 : a;
+		return Math.atan2(y, x) + Math.PI / 2;
 	}
 
 	@Override
 	public String toString() {
-		return "Vec2D<Integer>: [" + x + ", " + y + "] : " + hashCode();
+		return String.format("Vec2D<Double>: [%1$.5d, %2&.5d] : %3$", x, y, hashCode());
 	}
-
 }
