@@ -14,7 +14,7 @@ import com.jpixel.input.Mouse.MouseButton;
  * A class for processing input.
  * 
  * @author Denis Zhidkikh
- * @version 1.0
+ * @version 1.1
  * @since 26.4.2013
  */
 public final class InputHandler {
@@ -31,6 +31,8 @@ public final class InputHandler {
 		 */
 		protected HashMap<Integer, Key> registeredKeys = new HashMap<Integer, Key>();
 
+		protected KeyTypeEvent keyTypeEvent;
+
 		public void keyPressed(KeyEvent e) {
 			toggleKey(e, true);
 		}
@@ -40,7 +42,7 @@ public final class InputHandler {
 		}
 
 		public void keyTyped(KeyEvent e) {
-
+			if(keyTypeEvent != null) keyTypeEvent.keyTyped(e);
 		}
 
 		/**

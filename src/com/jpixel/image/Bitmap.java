@@ -7,7 +7,7 @@ import com.jpixel.math.MathUtils;
  * write color/image data.
  *
  * @author Denis Zhidkikh
- * @version 1.1
+ * @version 1.2
  * @since 26.10.2013
  */
 public class Bitmap {
@@ -124,6 +124,75 @@ public class Bitmap {
     }
 
     /**
+     * Performs a Block Image Transfer (blit) operation. Copies all of the pixel data (except for the alpha colour 0x00000000).
+     *
+     * @param b      Bitmap to copy.
+     * @param xStart X coordinate position on this bitmap to which begin copying. Can be negative.
+     * @param yStart Y coordinate position on this bitmap to which begin copying. Can be negative.
+     */
+    public void blitAlpha(Bitmap b, int xStart, int yStart) {
+        int x0 = xStart < 0 ? 0 : xStart;
+        int x1 = xStart + b.width;
+        int y0 = yStart < 0 ? 0 : yStart;
+        int y1 = yStart + b.height;
+
+        if (y1 > height) y1 = height;
+        if (x1 > width) x1 = width;
+
+        int col;
+
+        for (int yp = y0; yp < y1; yp++) {
+            int tp = yp * width;
+            int bp = (yp - yStart) * b.width - xStart;
+
+            for (int xp = x0; xp < x1; xp++) {
+                col = b.pixels[xp + bp];
+                if (col != 0)
+                    pixels[xp + tp] = col;
+            }
+        }
+    }
+
+    /**
+     * Performs a Block Image Transfer (blit) operation. Copies part of some part of pixel data (except for the alpha colour 0x00000000) from the given bitmap onto this one.
+     *
+     * @param b      Bitmap to copy.
+     * @param xStart X coordinate position on this bitmap to which begin copying.
+     * @param yStart Y coordinate position on this bitmap to which begin copying.
+     * @param xb     X coordinate position on the given bitmap from which begin copying.
+     * @param yb     Y coordinate position on the given bitmap from which begin copying.
+     * @param w      Width of the area to copy.
+     * @param h      Height of the area to copy.
+     */
+    public void blitAlpha(Bitmap b, int xStart, int yStart, int xb, int yb, int w, int h) {
+        if (w < 0 || h < 0) return;
+        if (w > b.width - xb) w = b.width - xb;
+        if (h > b.height - yb) h = b.height - yb;
+        if (!(xb >= 0 && yb >= 0 && xb <= w && yb <= h)) return;
+
+        int x0 = xStart < 0 ? 0 : xStart;
+        int x1 = xStart + w;
+        int y0 = yStart < 0 ? 0 : yStart;
+        int y1 = yStart + h;
+
+        if (y1 > height) y1 = height;
+        if (x1 > width) x1 = width;
+
+        int col;
+
+        for (int yp = y0; yp < y1; yp++) {
+            int tp = yp * width;
+            int sp = (yp - yStart + yb) * b.width - (xStart - xb);
+
+            for (int xp = x0; xp < x1; xp++) {
+                col = b.pixels[xp + sp];
+                if (col != 0)
+                    pixels[tp + xp] = col;
+            }
+        }
+    }
+
+    /**
      * Gets the width of this bitmap.
      *
      * @return Width of this bitmap.
@@ -181,11 +250,11 @@ public class Bitmap {
     /**
      * Rotates the bitmap around its center and outputs the result as a new object.
      *
-     * @param b Bitmap to rotate.
+     * @param b     Bitmap to rotate.
      * @param angle Angle of rotation in radians.
      * @return An object of {@link com.jpixel.image.Bitmap} containing rotated pixels.
      */
-    public static Bitmap rotate(Bitmap b, double angle){
+    public static Bitmap rotate(Bitmap b, double angle) {
         double vx_x = MathUtils.rotate_x(angle, 1.0, 0.0);
         double vx_y = MathUtils.rotate_y(angle, 1.0, 0.0);
         double vy_x = MathUtils.rotate_x(angle, 0.0, 1.0);
@@ -203,8 +272,8 @@ public class Bitmap {
         double nx0 = MathUtils.rotate_x(angle, -b.width / 2 - cx, -b.height / 2 - cy) + b.width / 2;
         double ny0 = MathUtils.rotate_y(angle, -b.width / 2 - cx, -b.height / 2 - cy) + b.height / 2;
 
-        if(nx0 >= b.width) nx0--;
-        if(ny0 >= b.height) ny0--;
+        if (nx0 >= b.width) nx0--;
+        if (ny0 >= b.height) ny0--;
 
         Bitmap result = new Bitmap(w, h);
 
@@ -214,7 +283,7 @@ public class Bitmap {
             for (int x = 0; x < w; x++) {
                 int xx = (int) (pos2_x + (x * vx_x));
                 int yy = (int) (pos2_y + (x * vx_y));
-                if(xx < 0 || xx >= b.width || yy < 0 || yy >= b.height) continue;
+                if (xx < 0 || xx >= b.width || yy < 0 || yy >= b.height) continue;
                 result.pixels[x + y * w] = b.pixels[xx + yy * b.width];
             }
         }
@@ -224,7 +293,7 @@ public class Bitmap {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[BITMAP] ");
+        StringBuilder sb = new StringBuilder("[BITMAP] ");
         sb.append(width).append("x").append(height);
         sb.append(" Hash: ").append(Integer.toHexString(hashCode()));
         return sb.toString();
