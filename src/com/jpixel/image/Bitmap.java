@@ -260,8 +260,8 @@ public class Bitmap {
         double vy_x = MathUtils.rotate_x(angle, 0.0, 1.0);
         double vy_y = MathUtils.rotate_y(angle, 0.0, 1.0);
 
-        double ww = Math.max(Math.abs(vx_x * b.width - vy_x * b.height), Math.abs(vx_x * b.width + vy_x * b.height));
-        double hh = Math.max(Math.abs(vx_y * b.width - vy_y * b.height), Math.abs(vx_y * b.width + vy_y * b.height));
+        double ww = Math.abs(vx_x * b.width) + Math.abs(vx_y * b.height);
+        double hh = Math.abs(vx_y * b.width) + Math.abs(vy_y * b.height);
 
         int w = (int) Math.round(ww);
         int h = (int) Math.round(hh);
